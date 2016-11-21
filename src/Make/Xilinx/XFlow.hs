@@ -58,6 +58,10 @@ xflowRules = do
     () <- cmd "cp -f" xflowFastF (workD ++ "/")
     () <- cmd "cp -f" bitgenOptF (workD ++ "/")
 
+    -- get rid of possibly already generated sources that xflow complains about
+    -- if they exist.
+    () <- cmd "rm -f" (workD </> entityName ++ "_map.ncd")
+
     -- Add top level entity option to xst opt file and copy to work directory
     xstOptLines <- readFileLines xstOptF
     let optPre = takeWhile (not . isPrefixOf "\"run\";") (reverse xstOptLines)
