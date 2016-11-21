@@ -22,3 +22,13 @@ tmdsNets = Constraints {
       ("tmds_n(3)", [ ("LOC", "\"V5\""), ("IOSTANDARD", "TMDS_33") ])
       ]
   }
+
+audioNets = Constraints {
+  rawConstraings = [],
+  netConstraints = [
+      ("audio(0)", [("LOC", "\"R7\""), ("IOSTANDARD", "LVTTL"),
+                    ("SLEW", "SLOW"), ("DRIVE", "8")]),
+      ("audio(1)", [("LOC", "\"T7\""), ("IOSTANDARD", "LVTTL"),
+                    ("SLEW", "SLOW"), ("DRIVE", "8")])
+      ]
+  }
