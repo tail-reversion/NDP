@@ -1,22 +1,22 @@
 requiredVHDLTopConstraints = Constraints {
   rawConstraints = [
       "CONFIG VCCAUX = \"3.3\"",
-      "TIMESPEC \"TS_clk_in\" = PERIOD \"clk_in\" 20000 ps INPUT_JITTER 200 ps"
+      "TIMESPEC \"TS_clk50MHz\" = PERIOD \"clk50MHz\" 20000 ps INPUT_JITTER 200 ps"
       ],
   netConstraints = [
       ("clk_in", [("LOC","\"H17\""), ("IOSTANDARD", "LVTTL")]),
-      ("clk_in", [("TNM_NET", "\"clk_in\"")])
+      ("clk_in", [("TNM_NET", "\"clk50MHz\"")])
       ]
   }
 
 requiredClashTopConstraints = Constraints {
   rawConstraints = [
       "CONFIG VCCAUX = \"3.3\"",
-      "TIMESPEC \"TS_clk_in\" = PERIOD \"clk_in(0)\" 20000 ps INPUT_JITTER 200 ps"
+      "TIMESPEC \"TS_clk50MHz\" = PERIOD \"clk50MHz_grp\" 20000 ps INPUT_JITTER 200 ps"
       ],
   netConstraints = [
       ("clk_in(0)", [("LOC","\"H17\""), ("IOSTANDARD", "LVTTL")]),
-      ("clk_in(0)", [("TNM_NET", "\"clk_in(0)\"")])
+      ("clk_in(0)", [("TNM_NET", "\"clk50MHz_grp\"")])
       ]
   }
 

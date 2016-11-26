@@ -1,1 +1,1 @@
-constraints = ["requiredConstraints", "tmdsNets"]
+constraints = (["requiredVHDLTopConstraints", "tmdsNets"], Nothing)

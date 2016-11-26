@@ -4,6 +4,7 @@ import Data.ByteString.Builder
 import qualified Data.ByteString.Lazy as B
 import Data.Conf
 import Data.List
+import Data.Maybe
 import Data.Monoid
 import Development.Shake
 import Development.Shake.Config
@@ -31,13 +32,13 @@ ucfRules = do
     entityConstraints <- (liftIO . readConf) $ entityD </> entityName </> constraintsF
 
     -- determine constraints worth fetching
-    let (Just constraintTags) = (getConf "constraints" entityConstraints) :: Maybe [String]
+    let (Just (constraintTags, customConstraints)) = (getConf "constraints" entityConstraints) :: Maybe ([String], Maybe Constraints)
 
     constraintBuilders <- (flip mapM) constraintTags $ \ tag -> do
       let (Just constraints) = (getConf tag masterConstraints) :: Maybe Constraints
       return $ renderConstraints constraints
 
-    (liftIO . B.writeFile ucF . B.concat . map toLazyByteString) constraintBuilders
+    (liftIO . B.writeFile ucF . B.concat . map toLazyByteString) (constraintBuilders ++ (maybeToList . (renderConstraints <$>)) customConstraints)
 
 data Constraints = Constraints {
   rawConstraints :: [String],
@@ -62,3 +63,4 @@ renderAttribs :: [(String, String)] -> Builder
 renderAttribs attr = mconcat $ intersperse sep [ render l r | (l, r) <- attr]
   where render l r = stringUtf8 l <> stringUtf8 " = " <> stringUtf8 r
         sep = stringUtf8 " | "
+

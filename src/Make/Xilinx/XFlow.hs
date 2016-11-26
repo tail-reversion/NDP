@@ -2,6 +2,7 @@ module Make.Xilinx.XFlow (xflowRules) where
 
 import Data.Char
 import Data.List
+import Data.Maybe
 import Development.Shake
 import Development.Shake.Config
 import Development.Shake.FilePath
