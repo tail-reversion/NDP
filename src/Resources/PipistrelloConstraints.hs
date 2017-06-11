@@ -58,14 +58,11 @@ sdCardSpiNets = Constraints {
   rawConstraints = [],
   netConstraints = [
       ("sd_cs(0)", [ NetLoc "A2", NetKV "IOSTANDARD" "SDIO", NetKV "SLEW" "FAST",
-                  NetKV "DRIVE" "8" --, NetFlag "PULLUP"
-                   ]),
+                  NetKV "DRIVE" "8", NetFlag "PULLUP" ]),
       ("sd_miso(0)", [ NetLoc "B4", NetKV "IOSTANDARD" "SDIO", NetKV "SLEW" "FAST",
-                    NetKV "DRIVE" "8" --, NetFlag "PULLUP"
-                     ]),
+                    NetKV "DRIVE" "8", NetFlag "PULLUP" ]),
       ("sd_mosi(0)", [ NetLoc "B3", NetKV "IOSTANDARD" "SDIO", NetKV "SLEW" "FAST",
-                    NetKV "DRIVE" "8" --, NetFlag "PULLUP"
-                     ]),
+                    NetKV "DRIVE" "8", NetFlag "PULLUP" ]),
       ("sd_clk(0)", [ NetLoc "A3", NetKV "IOSTANDARD" "SDIO", NetKV "SLEW" "FAST",
                     NetKV "DRIVE" "8" ])
       ]

@@ -63,7 +63,7 @@ begin
        INIT_SPI_FREQ_G => real(~LIT[2]) / real(100.0),
        SPI_FREQ_G      => real(~LIT[3]) / real(100.0),
        BLOCK_SIZE_G    => ~LIT[4],
-       CARD_TYPE_G     => SD_CARD_E
+       CARD_TYPE_G     => SDHC_CARD_E
        )
      port map (
        clk_i      => ~CLKO,

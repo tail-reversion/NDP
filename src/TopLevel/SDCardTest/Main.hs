@@ -44,11 +44,11 @@ topEntity :: SignalRaw ( Bit -- SD: miso
                                      Bit, -- SD: mosi
                                      Bit) -- SD: clock
 topEntity miso = register' rawClk (low, low, low, high, high, 0, 0, 0) (bundle outputs)
-  where outputs = (pure low, -- lights
-                   pure low,
+  where outputs = (sdMosi, --pure low, -- lights
+                   sdCs, -- pure low,
                    ready,
                    err,
-                   pure low,
+                   sdClk, -- pure low,
                    sdCs, sdMosi, sdClk) -- sd card
         (sdCs, sdMosi, sdClk, ready, err) = unbundle $ tiedOffSD miso
 
