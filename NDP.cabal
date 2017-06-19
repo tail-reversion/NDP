@@ -22,6 +22,7 @@ executable ndp
                        clash-ghc >= 0.7.1 && < 0.8,
                        clash-prelude >= 0.11.1 && < 0.12,
                        conf >= 0.1.1.0 && < 0.2.0.0,
+                       deepseq >= 1.4.2.0,
                        directory >= 1.2.2.0 && < 2,
                        formatting >= 6.2.2 && < 7,
                        hspec >= 2.2.3 && < 3,

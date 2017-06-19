@@ -3,7 +3,10 @@
 {-# LANGUAGE TypeOperators #-}
 module NDP.Utils (int2Signed,
                   bvXForm,
-                  swap
+                  swap,
+                  bitToBool,
+                  boolToBit,
+                  uDiv2
                   -- shuffleInside,
                   -- shuffleOutside
                   ) where
@@ -22,6 +25,19 @@ bvXForm f = v2bv . f . bv2v
 
 swap :: (a, b) -> (b, a)
 swap (a, b) = (b, a)
+
+bitToBool :: Bit -> Bool
+bitToBool 0 = False
+bitToBool 1 = True
+
+boolToBit :: Bool -> Bit
+boolToBit False = 0
+boolToBit True = 1
+
+uDiv2 :: KnownNat n => Unsigned (n+1) -> Unsigned n
+uDiv2 x = unpack quot
+  where (quot, rem) = split x
+
 
 -- -- "123456" -> "162534" -- ("123456" -> "16" "25" "34" -> "162534")
 -- shuffleOutside :: (KnownNat n,

@@ -1,0 +1,32 @@
+[
+  { "BlackBox" :
+      { "name" : "Xilinx.Primitive.IO.obuft#"
+      , "type" :
+"obuft# :: Signal' clk Bit -> Signal' clk Bit -> Signal' clk Bit"
+        , "templateD" :
+"-- OBUFT Begin
+~GENSYM[~COMPNAME_OBUFT][0] : block
+  library UNISIM;
+  use UNISIM.vcomponents.all;
+
+
+  signal ~GENSYM[tristate_enable][1] : std_logic;
+  signal ~GENSYM[input][2]           : std_logic;
+  signal ~GENSYM[output][3]          : std_logic;
+begin
+  ~SYM[1] <= ~ARG[1]
+  ~SYM[2] <= ~ARG[2]
+
+  ~SYM[0]_inst : OBUFT
+  port map (
+    O => ~SYM[3],
+    I => ~SYM[2],
+    T => ~SYM[1]
+  );
+
+ ~RESULT <= ~SYM[3];
+end block;
+-- OBUFT End"
+      }
+  }
+]
