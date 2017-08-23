@@ -12,6 +12,7 @@ import System.Posix.Escape
 import Make.Config
 import Make.Utils
 import Make.Vagrant
+import Make.Xilinx
 
 xflowRules = do
   (Just xilinxD) <- liftIO $ getConfigIO "XILINX_OUT"
@@ -63,7 +64,7 @@ xflowRules = do
     (Just vmPrefix) <- getConfig "VM_ROOT"
     (Just xilinxPart) <- getConfig "XILINX_PART"
 
-    (Just settingsF) <- getConfig "XILINX_SETTINGS"
+    -- (Just settingsF) <- getConfig "XILINX_SETTINGS"
 
     (Just xstOptF) <- getConfig "XST_OPT"
     (Just xflowFastF) <- getConfig "XFLOW_FAST"
@@ -90,14 +91,14 @@ xflowRules = do
       let xflowFast = takeFileName xflowFastF
       let bitgenOpt = takeFileName bitgenOptF
 
-      let sshCmd = escape $ intercalate " " ["source", settingsF, ";",
-                                             "xflow",
-                                             "-wd", vmPrefix </> workD,
-                                             "-p", xilinxPart,
-                                             "-synth", xstOpt,
-                                             "-implement", xflowFast,
-                                             "-config", bitgenOpt,
-                                             vmPrefix </> bitF -<.> "prj"]
+      let sshCmd = ["xflow",
+                    "-wd", vmPrefix </> workD,
+                    "-p", xilinxPart,
+                    "-synth", xstOpt,
+                    "-implement", xflowFast,
+                    "-config", bitgenOpt,
+                    vmPrefix </> bitF -<.> "prj"]
 
-      () <- cmd Shell "vagrant ssh -c" [sshCmd]
+      xilinxSSH sshCmd
+      -- vagrantSSH sshCmd
       cmd "cp" (workD </> takeFileName bitF) bitF

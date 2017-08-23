@@ -9,14 +9,17 @@ import Development.Shake.FilePath
 import Make.Command
 import Make.Config
 import Make.Vagrant
+import Make.Xilinx
 
 shortcutRules = do
-  installCommandTree $ commandGroup ":" [fpgaCommands, clashCommands]
+  installCommandTree $ commandGroup ":" [fpgaCommands, clashCommands, launchCommands]
 
 fpgaCommands = commandGroup "fpga:" [mkCommand "reset:" resetCmd
                                     ,mkCommand "build:" buildCmd
                                     ,mkCommand "load:" loadCmd
                                     ,mkCommand "burn:" burnCmd]
+
+launchCommands = commandGroup "launch:" [mkCommand "ise:" iseCmd]
 
 clashCommands = mkCommand "clash:" buildClashCmd
 
@@ -64,3 +67,6 @@ buildClashCmd project = do
   buildDir <- maybeConfig "BUILD" "build"
   clashOut <- maybeConfig "CLASH_OUT" (buildDir </> "clash")
   need [clashOut </> project </> project -<.> "vhdl"]
+
+iseCmd :: String -> Action ()
+iseCmd _ = withVagrant $ xilinxSSH ["ise"]

@@ -35,3 +35,29 @@ executable ndp
                        unordered-containers >= 0.2.7.1,
                        vector >= 0.11.0.0
 
+                       -- Build System
+  other-modules:       Make.Clash
+                       Make.Command
+                       Make.Config
+                       Make.GHDL
+                       Make.Oracles
+                       Make.PPM
+                       Make.Shortcuts
+                       Make.TileROM
+                       Make.Utils
+                       Make.Vagrant
+                       Make.Xilinx
+                       Make.Xilinx.Constraints
+                       Make.Xilinx.XFlow
+                       -- NDP
+                       NDP.Clocking
+                       NDP.IO.TriState
+                       NDP.Utils
+                       NDP.Video.TMDS
+                       -- Tests
+                       Tests.CLaSH
+                       Tests.IO.TriState
+                       Tests.Main
+                       Tests.TMDS
+                       
+                       
